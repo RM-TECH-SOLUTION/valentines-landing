@@ -1,0 +1,24 @@
+/* Heart shape applied to EXISTING slider container */
+.heart-slider {
+  border-radius: 0 !important;
+  clip-path: path(
+    "M160 320
+     C30 220 0 130 90 70
+     C145 20 160 45 160 45
+     C160 45 175 20 230 70
+     C320 130 290 220 160 320 Z"
+  );
+  overflow: hidden;
+  position: relative;
+}
+
+/* Golden border like reference */
+.heart-slider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: inherit;
+  border: 4px solid rgba(255, 215, 0, 0.9);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+  pointer-events: none;
+}
