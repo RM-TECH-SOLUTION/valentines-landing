@@ -12,8 +12,19 @@ import BackgroundEffects from './components/BackgroundEffects';
 import ScrollProgress from './components/ScrollProgress';
 import { Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
+import HeartLoader from './components/HeartLoader';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+    React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const [data] = useState({
     hero: {
       title: "For My Forever ❤️",
@@ -101,6 +112,10 @@ Vijay`
     }
   });
 
+  if (isLoading) {
+  return <HeartLoader />;
+}
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Background Effects */}
@@ -133,7 +148,6 @@ Vijay`
         <section id="promises">
           <LovePromise />
         </section>
-        
         {/* Memory Timeline Section */}
         <section id="timeline">
           <MemoryTimeline items={data.timeline} />
@@ -183,8 +197,11 @@ Vijay`
               {/* Copyright */}
               <div className="pt-8 border-t border-gray-200/50">
                 <p className="text-sm text-gray-500">
-                  © {new Date().getFullYear()} Valentine's Day Special - A Premium Love Experience
+                  © {new Date().getFullYear()} Valentine's Day Special - A Premium Love Experience 
                 </p>
+                 <a href='https://www.rmtechsolution.com/' target='_blank' className="mt-8 text-center text-gray-500 text-sm">
+            Made with <Heart className="inline w-4 h-4 text-red-500 animate-heart-beat" /> by RM Tech Solution
+          </a>
               </div>
             </div>
           </div>

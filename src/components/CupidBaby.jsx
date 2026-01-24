@@ -133,21 +133,21 @@ const CupidBaby = () => {
             className="relative"
           >
             {/* Cupid Wings */}
-            <motion.div
+            {/* <motion.div
               animate={{ scaleY: [1, 1.1, 1] }}
               transition={{ duration: 0.5, repeat: Infinity }}
               className="absolute -left-6 top-1/2 transform -translate-y-1/2"
             >
               <div className="text-4xl">🪽</div>
-            </motion.div>
+            </motion.div> */}
             
-            <motion.div
+            {/* <motion.div
               animate={{ scaleY: [1, 1.1, 1] }}
               transition={{ duration: 0.5, repeat: Infinity, delay: 0.25 }}
               className="absolute -right-6 top-1/2 transform -translate-y-1/2"
             >
               <div className="text-4xl">🪽</div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Cupid Body */}
             <div className="relative w-24 h-24 bg-gradient-to-br from-pink-200 to-pink-300 rounded-full flex items-center justify-center shadow-2xl border-4 border-white">
@@ -218,28 +218,6 @@ const CupidBaby = () => {
             ))}
           </motion.div>
 
-          {/* Cupid Message Bubble */}
-          <motion.div
-            animate={{
-              y: [0, -5, 0],
-              scale: [1, 1.05, 1]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity
-            }}
-            className="absolute -top-20 left-1/2 transform -translate-x-1/2"
-          >
-            {/* <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-xl border border-white/20">
-              <div className="flex items-center gap-2">
-                <span className="font-handwritten text-sm text-pink-600">Shooting love to:</span>
-                <div className="text-pink-500 font-bold">
-                  {sections[currentSection].replace('-', ' ')}
-                </div>
-              </div>
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/90 rotate-45"></div>
-            </div> */}
-          </motion.div>
 
           {/* Cupid Trail Sparkles */}
           <div className="absolute inset-0 overflow-hidden">
@@ -353,8 +331,6 @@ const CupidBaby = () => {
       >
         <Target className="w-6 h-6" />
       </motion.button>
-
-      Love Counter
 
       {/* Floating Love Messages */}
       <div className="fixed inset-0 z-30 pointer-events-none">
