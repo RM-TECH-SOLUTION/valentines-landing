@@ -189,7 +189,7 @@ const FinalCTA = () => {
               💍
             </motion.div>
 
-            <h2 className="text-5xl font-handwritten mb-6">
+            <h2 className="text-3xl font-handwritten mb-6">
               Our Forever Begins
             </h2>
 
@@ -210,7 +210,7 @@ const FinalCTA = () => {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             className="bg-black text-white rounded-3xl p-16 shadow-2xl">
 
-            <motion.h2 className="text-6xl font-handwritten mb-6" initial={{ scale: 0.8 }} animate={{ scale: 1 }}>
+            <motion.h2 className="text-3xl font-handwritten mb-6" initial={{ scale: 0.8 }} animate={{ scale: 1 }}>
               This Is Our Love Story 💞
             </motion.h2>
 
