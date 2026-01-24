@@ -141,9 +141,9 @@ Vijay`
         </section>
         
         {/* Love Story Section */}
-        <section id="story">
+        {/* <section id="story">
           <LoveStory />
-        </section>
+        </section> */}
         
         {/* Love Promise Section */}
         <section id="promises">
