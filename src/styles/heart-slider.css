@@ -1,24 +1,50 @@
-/* Heart shape applied to EXISTING slider container */
-.heart-slider {
-  border-radius: 0 !important;
-  clip-path: path(
-    "M160 320
-     C30 220 0 130 90 70
-     C145 20 160 45 160 45
-     C160 45 175 20 230 70
-     C320 130 290 220 160 320 Z"
-  );
-  overflow: hidden;
-  position: relative;
+.launch-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000 !important; /* FORCE BLACK */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
 }
 
-/* Golden border like reference */
-.heart-slider::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  clip-path: inherit;
-  border: 4px solid rgba(255, 215, 0, 0.9);
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
-  pointer-events: none;
+/* Center block */
+.launch-center {
+  text-align: center;
+  color: white;
+}
+
+/* Brand text */
+.launch-brand {
+  font-size: 22px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  opacity: 0.75;
+}
+
+/* Countdown number */
+.launch-number {
+  font-size: 160px;
+  font-weight: 900;
+  color: #ff007f;
+  text-shadow: 0 0 50px rgba(255, 0, 127, 0.85);
+  transform: scale(1);
+  transition: transform 0.2s ease;
+}
+
+/* Pulse animation */
+.launch-number.pop {
+  transform: scale(1.5);
+}
+
+/* Subtitle */
+.launch-subtitle {
+  margin-top: 16px;
+  font-size: 14px;
+  opacity: 0.5;
+  letter-spacing: 1px;
 }

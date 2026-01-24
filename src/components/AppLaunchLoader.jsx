@@ -1,37 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import "../styles/heart-slider.css"
 
-export default function AppLaunchCountdown({ onComplete }) {
+const LaunchCounter = ({ onFinish }) => {
   const [count, setCount] = useState(10);
+  const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    if (count > 0) {
-      const timer = setTimeout(() => setCount(count - 1), 700);
-      return () => clearTimeout(timer);
-    } else {
+    if (count === 0) {
       setTimeout(() => {
-        onComplete?.();
-      }, 500);
+        onFinish?.();
+      }, 1200);
+      return;
     }
-  }, [count]);
+
+    const timer = setTimeout(() => {
+      setAnimate(true);
+
+      setTimeout(() => {
+        setCount((prev) => prev - 1);
+        setAnimate(false);
+      }, 200);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [count, onFinish]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={count}
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.6 }}
-          transition={{ duration: 0.4 }}
-          className="text-center"
-        >
-          <p className="text-8xl font-extrabold text-white tracking-tight">
-            {count}
-            Launching...
-          </p>
-        </motion.div>
-      </AnimatePresence>
+    <div className="launch-overlay">
+      <div className="launch-center">
+        <h3 className="launch-brand">RM TECH PRESENTS</h3>
+
+        <div className={`launch-number ${animate ? "pop" : ""}`}>
+          {count === 0 ? "🚀 Launching" : count}
+        </div>
+
+        <p className="launch-subtitle">Preparing launch...</p>
+      </div>
     </div>
   );
-}
+};
+
+export default LaunchCounter;

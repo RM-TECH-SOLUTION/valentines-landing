@@ -16,15 +16,27 @@ import HeartLoader from './components/HeartLoader';
 import AppLaunchingLoader from './components/AppLaunchLoader'
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
+  const [showLaunch, setShowLaunch] = useState(true);
+  const [showHeartLoader, setShowHeartLoader] = useState(false);
 
-    React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
+  //   React.useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2200);
+
+  //   return () => clearTimeout(timer);
+  // }, []);
+
+   const handleLaunchFinish = () => {
+    setShowLaunch(false);
+    setShowHeartLoader(true);
+
+    // Hide heart loader after delay
+    setTimeout(() => {
+      setShowHeartLoader(false);
     }, 2200);
-
-    return () => clearTimeout(timer);
-  }, []);
+  };
 
   const [data] = useState({
     hero: {
@@ -113,9 +125,18 @@ Vijay`
     }
   });
 
-  if (isLoading) {
-  return <HeartLoader />;
-}
+//   if (isLoading) {
+//   return <HeartLoader />;
+// }
+
+ if (showLaunch) {
+    return <AppLaunchingLoader onFinish={handleLaunchFinish} />;
+  }
+
+  // STEP 2 — Show Heart Loader
+  if (showHeartLoader) {
+    return <HeartLoader />;
+  }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
