@@ -28,6 +28,7 @@ export default function AppLaunchCountdown({ onComplete }) {
         >
           <p className="text-8xl font-extrabold text-white tracking-tight">
             {count}
+            Launching...
           </p>
         </motion.div>
       </AnimatePresence>

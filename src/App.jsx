@@ -13,6 +13,7 @@ import ScrollProgress from './components/ScrollProgress';
 import { Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import HeartLoader from './components/HeartLoader';
+import AppLaunchingLoader from './components/AppLaunchLoader'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
