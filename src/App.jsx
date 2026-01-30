@@ -302,7 +302,19 @@ Vijay`
                 ))}
               </div>
 
-
+  <div className="mb-10">
+        <a
+          href="https://formportal.rmtechsolution.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-10 py-4 rounded-full font-bold text-white bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 shadow-xl hover:shadow-red-400/40 transition transform hover:scale-105 animate-pulse"
+        >
+          💌 Submit Your Request
+        </a>
+        <p className="mt-3 text-sm text-gray-500">
+          Takes less than 60 seconds • Fast & Simple
+        </p>
+      </div>
 
               {/* Copyright */}
               <div className="pt-8 border-t border-gray-200/50">

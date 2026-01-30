@@ -17,13 +17,13 @@ const ScrollProgress = () => {
         style={{ scaleX: scrollYProgress }}
         className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block"
       >
-        <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+        {/* <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
           <span className="text-sm font-semibold text-valentine-red">
             <motion.span>
               {scrollYProgress => `${Math.round(scrollYProgress.get() * 100)}%`}
             </motion.span>
           </span>
-        </div>
+        </div> */}
       </motion.div>
     </>
   );
