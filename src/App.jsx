@@ -234,7 +234,7 @@ Vijay`
       <ScrollProgress />
       
       {/* Cupid Baby Shooting Love Arrows */}
-      <CupidBaby />
+      {/* <CupidBaby /> */}
       
       {/* Main Content */}
       <div className="relative z-10">
