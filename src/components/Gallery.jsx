@@ -66,9 +66,11 @@ const Gallery = ({ images }) => {
                   className="relative bg-gradient-to-br from-valentine-red/10 to-valentine-pink/10 rounded-3xl p-8"
                 >
                   <div className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-valentine-red/20 to-valentine-pink/20 flex items-center justify-center">
-                    <div className="text-9xl">
-                      {['❤️', '💕', '💖', '💘'][selectedImage % 4]}
-                    </div>
+                     <img 
+    src={images[selectedImage].src} 
+    alt={images[selectedImage].alt} 
+    className="w-full h-full object-contain rounded-2xl"
+  />
                   </div>
                 </motion.div>
 
