@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeroSection from './components/HeroSection';
 import LoveLetter from './components/LoveLetter';
 import LoveStory from './components/LoveStory';
@@ -16,9 +16,81 @@ import HeartLoader from './components/HeartLoader';
 import AppLaunchingLoader from './components/AppLaunchLoader'
 
 function App() {
+  
+  const safeParse = (value) => {
+  try {
+    return JSON.parse(value || "[]");
+  } catch {
+    return [];
+  }
+};
+
   const [isLoading, setIsLoading] = useState(true);
+  const [valantinesData, setValantinesData] = useState(null);
   // const [showLaunch, setShowLaunch] = useState(true);
   // const [showHeartLoader, setShowHeartLoader] = useState(false);
+
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) {
+    return;
+  }
+
+  fetch(`https://api.rmtechsolution.com/getStory.php?id=${id}`)
+    .then(res => res.json())
+    .then(json => {
+      if (!json.success || !json.data) {
+        console.warn("Invalid API data — using static fallback");
+        setIsLoading(false);
+        return;
+      }
+
+      const story = json.data;
+
+      const parsed = {
+        hero: {
+          title: "For My Forever ❤️",
+          names: story.to_name || "My Love",
+          cta: "Read Our Love Story"
+        },
+
+        loveLetter: {
+          content: story.love_letter || ""
+        },
+
+        timeline: safeParse(story.journeys).map((item, index) => ({
+          id: index + 1,
+          title: item.title,
+          date: item.year,
+          emoji: ["🎬", "💫", "❤️", "🤍", "💍", "♾️"][index] || "❤️",
+          description: item.description
+        })),
+
+        gallery: safeParse(story.gallery_images).map((img, i) => ({
+          id: i + 1,
+          src: img,
+          alt: "Memory"
+        })),
+
+        countdown: {
+          title: "Together Since",
+          date: story.first_met_date || "2017-01-01",
+          label: "Days of Love"
+        }
+      };
+
+      setValantinesData(parsed);
+      setIsLoading(false);
+    })
+    .catch(err => {
+      console.error("API failed — fallback static", err);
+      setIsLoading(false);
+    });
+
+}, []);
+
 
     React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -153,12 +225,12 @@ Vijay`
       <div className="relative z-10">
         {/* Hero Section */}
         <section id="hero">
-          <HeroSection data={data.hero} />
+          <HeroSection data={valantinesData?.hero||data.hero} />
         </section>
         
         {/* Love Letter Section */}
         <section id="love-letter">
-          <LoveLetter content={data.loveLetter.content} />
+          <LoveLetter content={valantinesData?.loveLetter.content || data.loveLetter.content} />
         </section>
         
         {/* Love Story Section */}
@@ -172,17 +244,17 @@ Vijay`
         </section>
         {/* Memory Timeline Section */}
         <section id="timeline">
-          <MemoryTimeline items={data.timeline} />
+          <MemoryTimeline items={valantinesData?.timeline || data.timeline} />
         </section>
         
         {/* Gallery Section */}
         <section id="gallery">
-          <Gallery images={data.gallery} />
+          <Gallery images={valantinesData?.gallery || data.gallery} />
         </section>
         
         {/* Countdown Section */}
         <section id="countdown">
-          <Countdown data={data.countdown} />
+          <Countdown data={valantinesData?.countdown || data.countdown} />
         </section>
         
         {/* Final CTA Section */}
