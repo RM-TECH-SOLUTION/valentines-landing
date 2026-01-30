@@ -14,6 +14,8 @@ import { Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import HeartLoader from './components/HeartLoader';
 import AppLaunchingLoader from './components/AppLaunchLoader'
+import BackgroundMusic from './components/BackgroundMusic';
+
 
 function App() {
   
@@ -33,8 +35,10 @@ function App() {
 useEffect(() => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
+  const from = params.get("from");
 
-  if (!id) {
+  if (!id || !from) {
+    console.warn("Missing ID or FROM — blocked");
     return;
   }
 
@@ -42,12 +46,22 @@ useEffect(() => {
     .then(res => res.json())
     .then(json => {
       if (!json.success || !json.data) {
-        console.warn("Invalid API data — using static fallback");
+        console.warn("Invalid API data");
         return;
       }
 
       const story = json.data;
 
+      const expectedFrom = story.from_name?.toLowerCase().trim();
+      const urlFrom = from.toLowerCase().trim();
+
+      // 🔐 BLOCK if FROM mismatch
+      if (expectedFrom !== urlFrom) {
+        console.warn("Unauthorized access — FROM mismatch");
+        return;
+      }
+
+      // ✅ SAFE TO SHOW DATA
       const parsed = {
         hero: {
           title: "For My Forever ❤️",
@@ -86,10 +100,11 @@ useEffect(() => {
       setValantinesData(parsed);
     })
     .catch(err => {
-      console.error("API failed — fallback static", err);
+      console.error("API failed", err);
     });
 
 }, []);
+
 
 
     React.useEffect(() => {
@@ -223,6 +238,7 @@ Vijay`
       
       {/* Main Content */}
       <div className="relative z-10">
+         <BackgroundMusic />
         {/* Hero Section */}
         <section id="hero">
           <HeroSection data={valantinesData?.hero||data.hero} />
