@@ -53,12 +53,15 @@ useEffect(() => {
         hero: {
           title: "For My Forever ❤️",
           names: story.to_name || "My Love",
-          cta: "Read Our Love Story"
+          cta: "Read Our Love Story",
+          banners: safeParse(story.banner_images)
         },
 
         loveLetter: {
           content: story.love_letter || ""
         },
+
+        promises: safeParse(story.promises),
 
         timeline: safeParse(story.journeys).map((item, index) => ({
           id: index + 1,
@@ -240,7 +243,7 @@ Vijay`
         
         {/* Love Promise Section */}
         <section id="promises">
-          <LovePromise />
+          <LovePromise promises={valantinesData?.promises}/>
         </section>
         {/* Memory Timeline Section */}
         <section id="timeline">

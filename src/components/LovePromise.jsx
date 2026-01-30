@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Key, Shield, Crown, Target, Zap ,Heart} from 'lucide-react';
 
-const LovePromise = () => {
+const LovePromise = ({finalPromisesData}) => {
   const [activePromise, setActivePromise] = useState(null);
 
  const promises = [
@@ -51,6 +51,26 @@ const LovePromise = () => {
   ];
 
 
+const iconList = [Lock, Heart, Target, Shield, Zap, Crown];
+const colorList = [
+  "from-purple-500 to-pink-500",
+  "from-red-500 to-orange-500",
+  "from-blue-500 to-cyan-500",
+  "from-green-500 to-emerald-500",
+  "from-yellow-500 to-amber-500",
+  "from-indigo-500 to-purple-500"
+];
+
+const finalPromises = finalPromisesData?.length 
+  ? finalPromisesData?.map((p, i) => ({
+      id: i + 1,
+      title: p.title,
+      description: p.description,
+      icon: iconList[i % iconList.length],
+      color: colorList[i % colorList.length]
+    }))
+  :promises;
+
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-white/30 to-valentine-light/30 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
@@ -83,7 +103,7 @@ const LovePromise = () => {
 
         {/* Interactive promises grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {promises.map((promise, index) => {
+          {(finalPromises || promises).map((promise, index) => {
             const Icon = promise.icon;
             const isActive = activePromise === promise.id;
 

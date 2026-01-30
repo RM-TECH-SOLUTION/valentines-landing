@@ -5,9 +5,11 @@ import gsap from 'gsap';
 
 
 const HeroSection = ({ data }) => {
+  console.log(data,"datadata")
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const containerRef = useRef();
+
 
   // Text slides as shown in the screenshot
   const textSlides = [
@@ -30,6 +32,10 @@ const HeroSection = ({ data }) => {
       backgroundImage:"https://www.froogal.in/media/websites/577/images/uploads/1769084266eEnw.webp"
     }
   ];
+
+  const banners = data?.banners?.length 
+  ? data.banners 
+  : textSlides.map(slide => slide.backgroundImage);
 
   // Auto-slide functionality
   useEffect(() => {
@@ -189,7 +195,7 @@ const HeroSection = ({ data }) => {
         <div 
           className="absolute inset-0 bg-cover bg-center transition-all duration-700"
           style={{
-            backgroundImage: `url(${textSlides[currentSlide].backgroundImage})`,
+            backgroundImage: `url(${banners[currentSlide] || textSlides[currentSlide].backgroundImage})`,
             backgroundSize: 'contain',
             backgroundPosition: 'center',
           }}
