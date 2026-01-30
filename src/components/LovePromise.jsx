@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Key, Shield, Crown, Target, Zap ,Heart} from 'lucide-react';
 
-const LovePromise = ({finalPromisesData}) => {
+const LovePromise = ({ promises: finalPromisesData = [] }) => {
+  console.log(finalPromisesData,"promises")
   const [activePromise, setActivePromise] = useState(null);
 
  const promises = [
@@ -61,16 +62,15 @@ const colorList = [
   "from-indigo-500 to-purple-500"
 ];
 
-const finalPromises = finalPromisesData?.length 
-  ? finalPromisesData?.map((p, i) => ({
-      id: i + 1,
-      title: p.title,
-      description: p.description,
-      icon: iconList[i % iconList.length],
-      color: colorList[i % colorList.length]
-    }))
-  :promises;
-
+  const finalPromises = finalPromisesData.length
+    ? finalPromisesData.map((p, i) => ({
+        id: i + 1,
+        title: p.title,
+        description: p.description,
+        icon: iconList[i % iconList.length],
+        color: colorList[i % colorList.length]
+      }))
+    : promises;
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-white/30 to-valentine-light/30 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">

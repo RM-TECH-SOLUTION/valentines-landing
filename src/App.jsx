@@ -43,7 +43,6 @@ useEffect(() => {
     .then(json => {
       if (!json.success || !json.data) {
         console.warn("Invalid API data — using static fallback");
-        setIsLoading(false);
         return;
       }
 
@@ -85,11 +84,9 @@ useEffect(() => {
       };
 
       setValantinesData(parsed);
-      setIsLoading(false);
     })
     .catch(err => {
       console.error("API failed — fallback static", err);
-      setIsLoading(false);
     });
 
 }, []);

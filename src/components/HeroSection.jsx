@@ -5,7 +5,6 @@ import gsap from 'gsap';
 
 
 const HeroSection = ({ data }) => {
-  console.log(data,"datadata")
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const containerRef = useRef();
