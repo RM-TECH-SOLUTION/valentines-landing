@@ -320,19 +320,6 @@ Vijay`
           <div className="max-w-6xl mx-auto">
             <div className="text-center">
 
-              {/* Animated Cartoon Pointer */}
-              {valantinesData?.gallery?.length > 0 
-                ? null
-              :
-              <AnimatePresence>
-                {showCartoonPointer && (
-                  <FormPointerCartoon 
-                    onClose={() => setShowCartoonPointer(false)}
-                    isButtonHovered={buttonHovered}
-                  />
-                )}
-              </AnimatePresence>
-               }
 
               {/* Animated hearts */}
               <div className="flex justify-center gap-4 mb-8">
