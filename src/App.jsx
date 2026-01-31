@@ -263,7 +263,7 @@ Vijay`
 //   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden mt-2">
       {/* Background Effects */}
       <BackgroundEffects />
       

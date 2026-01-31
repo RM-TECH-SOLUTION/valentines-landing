@@ -32,20 +32,22 @@ const HeroSection = ({ data }) => {
     }
   ];
 
-  const banners = data?.banners?.length 
-  ? data.banners 
-  : textSlides.map(slide => slide.backgroundImage);
+ const slides = data?.banners?.length
+  ? data.banners
+  : textSlides;
+
 
   // Auto-slide functionality
-  useEffect(() => {
-    let interval;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % textSlides.length);
-      }, 4000);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying, textSlides.length]);
+ useEffect(() => {
+  if (!isPlaying || slides.length <= 1) return;
+
+  const interval = setInterval(() => {
+    setCurrentSlide(prev => (prev + 1) % slides.length);
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, [isPlaying, slides.length]);
+
 
   // Floating elements animation
   useEffect(() => {
@@ -106,13 +108,23 @@ const HeroSection = ({ data }) => {
     });
   }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % textSlides.length);
-  };
+ const nextSlide = () => {
+  setCurrentSlide(prev => (prev + 1) % slides.length);
+};
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + textSlides.length) % textSlides.length);
-  };
+const prevSlide = () => {
+  setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
+};
+
+const backgroundImage =
+  typeof slides[currentSlide] === 'string'
+    ? slides[currentSlide]
+    : slides[currentSlide]?.backgroundImage;
+
+    const slideColor =
+  slides[currentSlide]?.color || 'from-rose-600 to-pink-500';
+
+
 
   return (
     <motion.section 
@@ -136,11 +148,11 @@ const HeroSection = ({ data }) => {
       {/* Content */}
       <div className="relative z-20 text-center max-w-6xl mx-auto">
         {/* Title - Moved to top */}
-        <div className="mb-12,mt-10 relative">
+        <div className="mb-12 relative">
           <motion.h1 
             className="hero-title text-5xl md:text-7xl lg:text-8xl font-bold font-handwritten leading-tight"
           >
-            <span style={{fontFamily: "emoji"}} className="bg-gradient-to-r from-red-600 via-pink-600 to-rose-600 bg-clip-text text-transparent drop-shadow-lg">
+            <span  className="bg-gradient-to-r from-red-600 via-pink-600 to-rose-600 bg-clip-text text-transparent drop-shadow-lg">
               {data.title}
             </span>
           </motion.h1>
@@ -189,12 +201,12 @@ const HeroSection = ({ data }) => {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -100 }}
         transition={{ duration: 0.6 }}
-        className={`absolute inset-0 bg-gradient-to-br ${textSlides[currentSlide].color} flex flex-col items-center justify-center p-8`}
+        className={`absolute inset-0 bg-gradient-to-br  ${slideColor} flex flex-col items-center justify-center p-8`}
       >
         <div 
           className="absolute inset-0 bg-cover bg-center transition-all duration-700"
           style={{
-            backgroundImage: `url(${banners[currentSlide] || textSlides[currentSlide].backgroundImage})`,
+            backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'contain',
             backgroundPosition: 'center',
           }}
@@ -260,7 +272,7 @@ const HeroSection = ({ data }) => {
           />
           
           <div className="hero-names opacity-100 text-4xl md:text-6xl lg:text-7xl font-bold font-handwritten mb-8 px-4">
-            <span style={{fontFamily: "emoji"}} className="bg-gradient-to-r from-red-700 via-pink-600 to-rose-600 bg-clip-text text-transparent px-8 py-4 rounded-3xl inline-block shadow-2xl bg-white/10 backdrop-blur-sm border border-white/30">
+            <span  className="bg-gradient-to-r from-red-700 via-pink-600 to-rose-600 bg-clip-text text-transparent px-8 py-4 rounded-3xl inline-block shadow-2xl bg-white/10 backdrop-blur-sm border border-white/30">
               {data.names}
             </span>
           </div>

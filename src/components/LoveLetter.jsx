@@ -30,7 +30,7 @@ const LoveLetter = ({ content }) => {
               </div>
             </div>
 
-            <h2 style={{fontFamily: "emoji"}} className="text-4xl md:text-5xl font-bold mb-8 text-center font-handwritten text-gray-800">
+            <h2  className="text-4xl md:text-5xl font-bold mb-8 text-center font-handwritten text-gray-800">
               My Love Letter 💌
             </h2>
             
@@ -52,7 +52,7 @@ const LoveLetter = ({ content }) => {
             {/* Signature */}
             <div className="mt-12 pt-8 border-t border-gray-300/30">
               <div className="text-right">
-                <div style={{fontFamily: "emoji"}} className="font-handwritten text-3xl text-valentine-red inline-block mb-2">
+                <div  className="font-handwritten text-3xl text-valentine-red inline-block mb-2">
                   Forever Yours
                 </div>
                 <div className="w-48 h-px bg-gradient-to-r from-transparent via-valentine-red to-transparent ml-auto"></div>

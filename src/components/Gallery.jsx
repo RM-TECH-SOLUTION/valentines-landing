@@ -13,7 +13,6 @@ const Gallery = ({ images }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-5xl md:text-6xl font-bold text-center mb-16 font-handwritten text-gray-800"
-          style={{fontFamily: "emoji"}}
         >
           Precious Memories 📸
         </motion.h2>

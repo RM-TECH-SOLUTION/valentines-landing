@@ -16,7 +16,6 @@ const MemoryTimeline = ({ items }) => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-5xl md:text-6xl font-bold text-center mb-16 font-handwritten text-gray-800"
-          style={{fontFamily: "emoji"}}
         >
           Our Journey Together ✨
         </motion.h2>
@@ -50,7 +49,7 @@ const MemoryTimeline = ({ items }) => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 style={{fontFamily: "emoji"}} className="text-2xl md:text-3xl font-bold text-gray-800">{item.title}</h3>
+                            <h3  className="text-2xl md:text-3xl font-bold text-gray-800">{item.title}</h3>
                             <span className="text-3xl">{item.emoji}</span>
                           </div>
                           <p className="text-valentine-red font-semibold text-lg mb-4">{item.date}</p>
