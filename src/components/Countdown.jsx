@@ -52,7 +52,7 @@ const Countdown = ({ data }) => {
                 </div>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 font-handwritten">
+              <h2 style={{fontFamily: "emoji"}} className="text-4xl md:text-5xl font-bold mb-6 font-handwritten">
                 {data.title}
               </h2>
               

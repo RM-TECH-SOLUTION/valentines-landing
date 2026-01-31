@@ -92,7 +92,7 @@ const colorList = [
           </div>
           
           <h2 className="text-5xl md:text-6xl font-bold font-handwritten relative z-10">
-            <span className="bg-gradient-to-r from-valentine-red via-valentine-pink to-pink-400 bg-clip-text text-transparent">
+            <span style={{fontFamily: "emoji"}} className="bg-gradient-to-r from-valentine-red via-valentine-pink to-pink-400 bg-clip-text text-transparent">
               Promises From My Heart
             </span>
           </h2>
@@ -131,7 +131,7 @@ const colorList = [
                   </motion.div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-bold text-gray-800 mb-3">{promise.title}</h3>
+                  <h3 style={{fontFamily: "emoji"}} className="text-2xl font-bold text-gray-800 mb-3">{promise.title}</h3>
 
                   {/* Description with expandable content */}
                   <motion.div
@@ -149,7 +149,7 @@ const colorList = [
                         className="mt-6 pt-6 border-t border-gray-100"
                       >
                         <div className="text-right">
-                          <div className="font-handwritten text-2xl text-valentine-red inline-block">
+                          <div style={{fontFamily: "emoji"}} className="font-handwritten text-2xl text-valentine-red inline-block">
                             With All My Love
                           </div>
                           <div className="w-32 h-px bg-gradient-to-r from-transparent via-valentine-red to-transparent ml-auto mt-2"></div>

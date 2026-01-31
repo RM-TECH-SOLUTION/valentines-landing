@@ -132,7 +132,7 @@ const FinalCTA = () => {
 
               <Heart className="w-20 h-20 mx-auto mb-8 text-valentine-red fill-valentine-red animate-heart-beat" />
 
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 font-handwritten text-gray-800">
+              <h2 style={{fontFamily: "emoji"}} className="text-4xl md:text-5xl font-bold mb-6 font-handwritten text-gray-800">
                 {answered ? 'My Heart Is Yours 🥰' : 'Will you be my Valentine? 💌'}
               </h2>
 

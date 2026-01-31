@@ -136,11 +136,11 @@ const HeroSection = ({ data }) => {
       {/* Content */}
       <div className="relative z-20 text-center max-w-6xl mx-auto">
         {/* Title - Moved to top */}
-        <div className="mb-12 relative">
+        <div className="mb-12,mt-10 relative">
           <motion.h1 
             className="hero-title text-5xl md:text-7xl lg:text-8xl font-bold font-handwritten leading-tight"
           >
-            <span className="bg-gradient-to-r from-red-600 via-pink-600 to-rose-600 bg-clip-text text-transparent drop-shadow-lg">
+            <span style={{fontFamily: "emoji"}} className="bg-gradient-to-r from-red-600 via-pink-600 to-rose-600 bg-clip-text text-transparent drop-shadow-lg">
               {data.title}
             </span>
           </motion.h1>
@@ -156,7 +156,7 @@ const HeroSection = ({ data }) => {
 
         {/* Text Slider Container */}
         {/* Slider Container */}
-<div className="relative h-80 md:h-96 overflow-hidden shadow-2xl border-4 border-white/80 backdrop-blur-sm">
+<div className="relative h-80 md:h-96 overflow-hidden shadow-2xl border-4 border-white/80 backdrop-blur-sm mt-25">
 
   {/* SVG Heart Clip Mask */}
   <svg viewBox="0 0 320 320" className="absolute inset-0 w-full h-full pointer-events-none">
@@ -260,7 +260,7 @@ const HeroSection = ({ data }) => {
           />
           
           <div className="hero-names opacity-100 text-4xl md:text-6xl lg:text-7xl font-bold font-handwritten mb-8 px-4">
-            <span className="bg-gradient-to-r from-red-700 via-pink-600 to-rose-600 bg-clip-text text-transparent px-8 py-4 rounded-3xl inline-block shadow-2xl bg-white/10 backdrop-blur-sm border border-white/30">
+            <span style={{fontFamily: "emoji"}} className="bg-gradient-to-r from-red-700 via-pink-600 to-rose-600 bg-clip-text text-transparent px-8 py-4 rounded-3xl inline-block shadow-2xl bg-white/10 backdrop-blur-sm border border-white/30">
               {data.names}
             </span>
           </div>
