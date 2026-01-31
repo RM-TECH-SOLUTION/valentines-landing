@@ -11,10 +11,13 @@ import CupidBaby from './components/CupidBaby';
 import BackgroundEffects from './components/BackgroundEffects';
 import ScrollProgress from './components/ScrollProgress';
 import { Heart } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion,AnimatePresence } from 'framer-motion';
 import HeartLoader from './components/HeartLoader';
 import AppLaunchingLoader from './components/AppLaunchLoader'
 import BackgroundMusic from './components/BackgroundMusic';
+import FormPointerCartoon from './components/FormPointerCartoon';
+import {  MousePointerClick } from 'lucide-react';
+
 
 
 function App() {
@@ -31,6 +34,8 @@ function App() {
   const [valantinesData, setValantinesData] = useState(null);
   // const [showLaunch, setShowLaunch] = useState(true);
   // const [showHeartLoader, setShowHeartLoader] = useState(false);
+  const [showCartoonPointer, setShowCartoonPointer] = useState(false);
+  const [buttonHovered, setButtonHovered] = useState(false);
 
 useEffect(() => {
   const params = new URLSearchParams(window.location.search);
@@ -55,13 +60,11 @@ useEffect(() => {
       const expectedFrom = story.from_name?.toLowerCase().trim();
       const urlFrom = from.toLowerCase().trim();
 
-      // 🔐 BLOCK if FROM mismatch
       if (expectedFrom !== urlFrom) {
         console.warn("Unauthorized access — FROM mismatch");
         return;
       }
 
-      // ✅ SAFE TO SHOW DATA
       const parsed = {
         hero: {
           title: "For My Forever ❤️",
@@ -75,6 +78,8 @@ useEffect(() => {
         },
 
         promises: safeParse(story.promises),
+        
+        music: story.audio_url,
 
         timeline: safeParse(story.journeys).map((item, index) => ({
           id: index + 1,
@@ -124,6 +129,38 @@ useEffect(() => {
   //     setShowHeartLoader(false);
   //   }, 2200);
   // };
+
+    useEffect(() => {
+    // Show cartoon pointer after 5 seconds of page load
+    const pointerTimer = setTimeout(() => {
+      setShowCartoonPointer(true);
+    }, 2000);
+
+    // Auto-hide after 15 seconds
+    const hideTimer = setTimeout(() => {
+      setShowCartoonPointer(false);
+    }, 40000);
+
+    return () => {
+      clearTimeout(pointerTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
+    const handleButtonHover = (isHovering) => {
+    setButtonHovered(isHovering);
+    // Hide cartoon when user hovers over button
+    if (isHovering) {
+      setShowCartoonPointer(false);
+    }
+  };
+
+  const handleFormClick = () => {
+    // Track the click and hide cartoon permanently
+    setShowCartoonPointer(false);
+    // Optionally, you can store in localStorage that user has clicked
+    localStorage.setItem('formClicked', 'true');
+  };
 
   const [data] = useState({
     hero: {
@@ -238,10 +275,10 @@ Vijay`
       
       {/* Main Content */}
       <div className="relative z-10">
-         <BackgroundMusic />
+         <BackgroundMusic music={valantinesData?.music}/>
         {/* Hero Section */}
         <section id="hero">
-          <HeroSection data={valantinesData?.hero||data.hero} />
+          <HeroSection data={valantinesData?.hero || data.hero} />
         </section>
         
         {/* Love Letter Section */}
@@ -282,6 +319,21 @@ Vijay`
         <footer className="relative py-16 px-4 bg-gradient-to-b from-transparent to-black/10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center">
+
+              {/* Animated Cartoon Pointer */}
+              {valantinesData?.gallery?.length > 0 
+                ? null
+              :
+              <AnimatePresence>
+                {showCartoonPointer && (
+                  <FormPointerCartoon 
+                    onClose={() => setShowCartoonPointer(false)}
+                    isButtonHovered={buttonHovered}
+                  />
+                )}
+              </AnimatePresence>
+               }
+
               {/* Animated hearts */}
               <div className="flex justify-center gap-4 mb-8">
                 {[...Array(3)].map((_, i) => (
@@ -302,19 +354,52 @@ Vijay`
                 ))}
               </div>
 
-  <div className="mb-10">
-        <a
-          href="https://formportal.rmtechsolution.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-10 py-4 rounded-full font-bold text-white bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 shadow-xl hover:shadow-red-400/40 transition transform hover:scale-105 animate-pulse"
-        >
-          💌 Submit Your Request
-        </a>
-        <p className="mt-3 text-sm text-gray-500">
-          Takes less than 60 seconds • Fast & Simple
-        </p>
-      </div>
+               {/* Submit Request Button with Cartoon Pointer Target */}
+              {valantinesData?.gallery?.length > 0 ? null :
+              <div className="relative mb-10">
+                <div 
+                  className="relative inline-block"
+                  onMouseEnter={() => handleButtonHover(true)}
+                  onMouseLeave={() => handleButtonHover(false)}
+                >
+                  <motion.a
+                    href="https://formportal.rmtechsolution.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-10 py-4 rounded-full font-bold text-white bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 shadow-xl hover:shadow-red-400/40 transition-all transform hover:scale-105 animate-pulse relative z-10"
+                    onClick={handleFormClick}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      <MousePointerClick className="w-5 h-5" />
+                      💌 Submit Your Request
+                    </span>
+                    
+                    {/* Click me indicator */}
+                    <motion.div
+                      className="absolute -top-2 -right-2"
+                      animate={{ 
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 20, -20, 0]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse"
+                      }}
+                    >
+                      <div className="bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full animate-pulse">
+                        CLICK ME!
+                      </div>
+                    </motion.div>
+                  </motion.a>
+                </div>
+                
+                <p className="mt-3 text-sm text-gray-500">
+                  Takes less than 60 seconds • Fast & Simple
+                </p>
+              </div>}
 
               {/* Copyright */}
               <div className="pt-8 border-t border-gray-200/50">

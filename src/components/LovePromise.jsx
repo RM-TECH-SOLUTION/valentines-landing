@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Lock, Key, Shield, Crown, Target, Zap ,Heart} from 'lucide-react';
 
 const LovePromise = ({ promises: finalPromisesData = [] }) => {
-  console.log(finalPromisesData,"promises")
+
   const [activePromise, setActivePromise] = useState(null);
 
  const promises = [

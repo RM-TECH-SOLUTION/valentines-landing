@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
-export default function BackgroundMusic() {
+export default function BackgroundMusic(props) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -44,9 +44,12 @@ export default function BackgroundMusic() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music/romantic.mp3" preload="auto" />
+        {props?.music ? 
+        <audio ref={audioRef} src={props?.music} preload="auto" />
+        :
+        <audio ref={audioRef} src="/music/romantic.mp3" preload="auto" />
+        }
 
-      {/* Optional Music Button */}
       <button
         onClick={toggleMusic}
         className="fixed bottom-6 right-6 z-[9999] bg-white/80 backdrop-blur px-4 py-3 rounded-full shadow-lg hover:scale-105 transition"
