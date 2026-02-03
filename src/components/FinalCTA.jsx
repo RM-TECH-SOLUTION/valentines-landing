@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, X } from 'lucide-react';
 
-const FinalCTA = () => {
+const FinalCTA = ({ data }) => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [proposalMode, setProposalMode] = useState(false);
@@ -47,10 +47,10 @@ const FinalCTA = () => {
     });
 
     const emotionalMessages = [
-      "It’s okay… my heart will still whisper your name 💔",
-      "Even a no can’t erase what I feel for you 💞",
-      "Some hearts love silently… mine loves you 🥺",
-      "I’ll carry this feeling gently, without forcing 💕",
+      "It’s okay… my heart will still whisper your name �",
+      "Even a no can’t erase what I feel for you �",
+      "Some hearts love silently… mine loves you �",
+      "I’ll carry this feeling gently, without forcing �",
       "You already live in my heart, no matter what 💌",
       "If love had a sound… mine would say your name 💘"
     ];
@@ -135,7 +135,9 @@ const FinalCTA = () => {
               <h2 className="text-4xl md:text-5xl font-bold mb-6 font-handwritten text-gray-800">
                 {answered ? 'My Heart Is Yours 🥰' : 'Will you be my Valentine? 💌'}
               </h2>
-
+              <h2 className="text-3xl md:text-3xl font-bold mb-6 font-handwritten text-gray-800 bg-gradient-to-r from-red-600 via-pink-600 to-rose-600 bg-clip-text text-transparent drop-shadow-lg">
+                {data.names}
+              </h2>
               <p className="text-xl text-gray-600 mb-10">
                 {answered 
                   ? 'This moment will live forever in my soul...'

@@ -312,7 +312,7 @@ Vijay`
         
         {/* Final CTA Section */}
         <section id="cta">
-          <FinalCTA />
+          <FinalCTA data={valantinesData?.hero || data.hero}/>
         </section>
         
         {/* Premium Footer */}
